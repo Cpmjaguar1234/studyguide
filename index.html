@@ -277,8 +277,7 @@
         }
 
         // Initialize all boards on page load
-        window.addEventListener('load', () => { // <-- ADD THIS LINE
-            // Move the line here:
+        window.addEventListener('load', () => { // <-- This block
             // Disable the default infobox on all JSXGraph boards
             JXG.Options.infobox.fontSize = 0;
 
@@ -286,9 +285,17 @@
             initBoard2();
             initBoard3();
             initBoard4();
+
+            // --- ADD THIS LINE ---
+            // Manually tell MathJax to find and render all LaTeX on the page
+            if (typeof MathJax !== 'undefined' && MathJax.typeset) {
+                MathJax.typeset();
+            }
+            // --- END ADD ---
         });
 
     </script>
 </body>
 </html>
+
 
