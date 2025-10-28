@@ -154,7 +154,7 @@
         }
 
         // Disable the default infobox on all JSXGraph boards
-        JXG.Options.infobox.fontSize = 0;
+        // JXG.Options.infobox.fontSize = 0; // <-- MOVE THIS LINE
 
         // --- Initialize JSXGraph Boards ---
 
@@ -277,6 +277,10 @@
 
         // Initialize all boards on page load
         document.addEventListener('DOMContentLoaded', () => {
+            // Move the line here:
+            // Disable the default infobox on all JSXGraph boards
+            JXG.Options.infobox.fontSize = 0;
+
             initBoard1();
             initBoard2();
             initBoard3();
@@ -286,3 +290,4 @@
     </script>
 </body>
 </html>
+
