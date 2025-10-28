@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 10 Geometry Review</title>
+    
+    <!-- 1. Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 2. JSXGraph for geometry rendering -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.6.1/dist/jsxgraph.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jsxgraph@1.6.1/dist/jsxgraphcore.js"></script>
+    
+    <!-- 3. MathJax for beautiful math notation -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- 4. Custom styles -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        /* Custom class for JSXGraph containers */
+        .jxgbox {
+            width: 100%;
+            height: 350px;
+            border: 2px solid #4a5568; /* gray-700 */
+            border-radius: 0.5rem; /* rounded-lg */
+            background-color: #f7fafc; /* gray-100 for contrast */
+        }
+        /* Style MathJax output */
+        mjx-container {
+            display: inline-block !important;
+            margin: 0 !important;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200 min-h-screen p-4 md:p-8">
+
+    <div class="max-w-4xl mx-auto">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-white">
+                Chapter 10: Geometry Review
+            </h1>
+            <p class="text-xl text-blue-400 mt-2">Circles, Tangents, and Equations</p>
+        </header>
+
+        <main>
+            <!-- Question 1: Naming Parts of a Circle (from 10-1) -->
+            <section class="bg-gray-800 rounded-lg shadow-xl p-6 mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-white">Problem 1: Parts of a Circle</h2>
+                <p class="mb-4">For Exercises 1-4, refer to the diagram of $\text{Circle L}$.</p>
+                
+                <!-- JSXGraph rendering for Problem 1 -->
+                <div id="jxgbox1" class="jxgbox mb-4"></div>
+                
+                <ol class="list-decimal list-inside space-y-2 mb-4">
+                    <li>Name the circle.</li>
+                    <li>Name a radius.</li>
+                    <li>Name a chord.</li>
+                    <li>Name a diameter.</li>
+                </ol>
+
+                <button onclick="toggleAnswer('ans1')" class="px-5 py-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition duration-200 shadow-lg">
+                    Show Answer
+                </button>
+                <div id="ans1" class="hidden mt-4 p-4 bg-gray-700 rounded-lg space-y-2">
+                    <p><strong>1. Name the circle:</strong> $\text{Circle L}$ (or $\odot L$)</p>
+                    <p><strong>2. Name a radius:</strong> $\overline{RL}$, $\overline{LT}$, or $\overline{LW}$</p>
+                    <p><strong>3. Name a chord:</strong> $\overline{RS}$ or $\overline{ST}$ (Note: $\overline{RT}$ is also a chord)</p>
+                    <p><strong>4. Name a diameter:</strong> $\overline{RT}$</p>
+                </div>
+            </section>
+
+            <!-- Question 2: Tangent Justification (from 10-5) -->
+            <section class="bg-gray-800 rounded-lg shadow-xl p-6 mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-white">Problem 2: Tangent Justification</h2>
+                <p class="mb-4">Determine whether $\overline{HI}$ is tangent to $\text{Circle G}$. Justify your answer.</p>
+                
+                <!-- JSXGraph rendering for Problem 2 -->
+                <div id="jxgbox2" class="jxgbox mb-4"></div>
+
+                <button onclick="toggleAnswer('ans2')" class="px-5 py-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition duration-200 shadow-lg">
+                    Show Answer
+                </button>
+                <div id="ans2" class="hidden mt-4 p-4 bg-gray-700 rounded-lg space-y-2">
+                    <p><strong>Answer:</strong> Yes, $\overline{HI}$ is tangent.</p>
+                    <p><strong>Justification:</strong> A line is tangent to a circle if and only if it is perpendicular to the radius at the point of tangency. We must check if $\triangle HGI$ is a right triangle, with the right angle at G.</p>
+                    <p>We can use the converse of the Pythagorean Theorem:</p>
+                    <p>$a^2 + b^2 \stackrel{?}{=} c^2$</p>
+                    <p>$(GI)^2 + (HI)^2 \stackrel{?}{=} (HG)^2$</p>
+                    <p>$9^2 + 40^2 \stackrel{?}{=} 41^2$</p>
+                    <p>$81 + 1600 \stackrel{?}{=} 1681$</p>
+                    <p>$1681 = 1681$</p>
+                    <p>Since the theorem holds true, $\triangle HGI$ is a right triangle and $\angle HGI$ is a right angle. Therefore, $\overline{HI} \perp \overline{GI}$, making $\overline{HI}$ tangent to $\text{Circle G}$.</p>
+                </div>
+            </section>
+
+            <!-- Question 3: Find x (Tangents from a point) (from 10-5) -->
+            <section class="bg-gray-800 rounded-lg shadow-xl p-6 mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-white">Problem 3: Find $x$</h2>
+                <p class="mb-4">Find $x$. Assume that segments that appear to be tangent are tangent.</p>
+                
+                <!-- JSXGraph rendering for Problem 3 -->
+                <div id="jxgbox3" class="jxgbox mb-4"></div>
+
+                <button onclick="toggleAnswer('ans3')" class="px-5 py-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition duration-200 shadow-lg">
+                    Show Answer
+                </button>
+                <div id="ans3" class="hidden mt-4 p-4 bg-gray-700 rounded-lg space-y-2">
+                    <p><strong>Answer:</strong> $x = 8$</p>
+                    <p><strong>Justification:</strong> If two segments from the same exterior point are tangent to a circle, then they are congruent.</p>
+                    <p>$\overline{PQ} \cong \overline{PR}$</p>
+                    <p>$3x - 6 = x + 10$</p>
+                    <p>$2x - 6 = 10 \text{ (Subtract } x \text{ from both sides)}$</p>
+                    <p>$2x = 16 \text{ (Add } 6 \text{ to both sides)}$</p>
+                    <p>$x = 8 \text{ (Divide by } 2 \text{)}$</p>
+                </div>
+            </section>
+
+            <!-- Question 4: Equation of a Circle (from 10-8) -->
+            <section class="bg-gray-800 rounded-lg shadow-xl p-6 mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-white">Problem 4: Equation of a Circle</h2>
+                <p class="mb-4">Write the equation of the circle with its center at $(4, 3)$ and a radius of $9$.</p>
+                
+                <!-- JSXGraph rendering for Problem 4 -->
+                <div id="jxgbox4" class="jxgbox mb-4"></div>
+
+                <button onclick="toggleAnswer('ans4')" class="px-5 py-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition duration-200 shadow-lg">
+                    Show Answer
+                </button>
+                <div id="ans4" class="hidden mt-4 p-4 bg-gray-700 rounded-lg space-y-2">
+                    <p><strong>Answer:</strong> $(x - 4)^2 + (y - 3)^2 = 81$</p>
+                    <p><strong>Justification:</strong> The standard equation for a circle is:</p>
+                    <p>$(x - h)^2 + (y - k)^2 = r^2$</p>
+                    <p>Where $(h, k)$ is the center and $r$ is the radius.</p>
+                    <p>Substitute the given values: $(h, k) = (4, 3)$ and $r = 9$.</p>
+                    <p>$(x - 4)^2 + (y - 3)^2 = 9^2$</p>
+                    <p>$(x - 4)^2 + (y - 3)^2 = 81$</p>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        // <!-- 5. Main JavaScript for interactivity -->
+        
+        // Helper function to toggle answer visibility
+        function toggleAnswer(id) {
+            const answerEl = document.getElementById(id);
+            answerEl.classList.toggle('hidden');
+        }
+
+        // Disable the default infobox on all JSXGraph boards
+        JXG.Options.infobox.fontSize = 0;
+
+        // --- Initialize JSXGraph Boards ---
+
+        // Board 1: Parts of a Circle
+        function initBoard1() {
+            const board = JXG.JSXGraph.initBoard('jxgbox1', {
+                boundingbox: [-10, 10, 10, -10],
+                axis: false,
+                grid: false,
+                showCopyright: false,
+                showNavigation: false
+            });
+
+            // Center L
+            const l = board.create('point', [0, 0], { name: 'L', size: 3, color: '#3b82f6' });
+            // Circle
+            const c = board.create('circle', [l, 7], { strokeColor: '#e5e7eb', strokeWidth: 2 });
+            
+            // Points on circle
+            const r = board.create('point', [-7, 0], { name: 'R', size: 2, color: '#e5e7eb' });
+            const t = board.create('point', [7, 0], { name: 'T', size: 2, color: '#e5e7eb' });
+            const w = board.create('point', [0, 7], { name: 'W', size: 2, color: '#e5e7eb' });
+            const s = board.create('point', [-4, 5.65], { name: 'S', size: 2, color: '#e5e7eb' });
+
+            // Diameter RT
+            board.create('segment', [r, t], { strokeColor: '#60a5fa', strokeWidth: 2 });
+            // Radius LW
+            board.create('segment', [l, w], { strokeColor: '#60a5fa', strokeWidth: 2 });
+            // Radius LR
+            board.create('segment', [l, r], { strokeColor: '#60a5fa', strokeWidth: 2, dash: 2 });
+            // Chord RS
+            board.create('segment', [r, s], { strokeColor: '#f87171', strokeWidth: 2 });
+            // Chord ST
+            board.create('segment', [s, t], { strokeColor: '#f87171', strokeWidth: 2 });
+        }
+
+        // Board 2: Tangent Justification
+        function initBoard2() {
+            const board = JXG.JSXGraph.initBoard('jxgbox2', {
+                boundingbox: [-5, 45, 45, -5],
+                axis: false,
+                grid: false,
+                showCopyright: false,
+                showNavigation: false
+            });
+
+            // Points
+            const g = board.create('point', [0, 0], { name: 'G', size: 3, color: '#3b82f6' });
+            const i = board.create('point', [0, 9], { name: 'I', size: 2, color: '#e5e7eb' });
+            const h = board.create('point', [40, 0], { name: 'H', size: 2, color: '#e5e7eb' });
+            
+            // Circle
+            const c = board.create('circle', [g, 9], { strokeColor: '#e5e7eb', strokeWidth: 2 });
+
+            // Triangle segments
+            const segGI = board.create('segment', [g, i], { strokeColor: '#60a5fa', strokeWidth: 2 }); // Radius
+            const segHI = board.create('segment', [h, i], { strokeColor: '#f87171', strokeWidth: 2 }); // Potential Tangent
+            const segHG = board.create('segment', [h, g], { strokeColor: '#e5e7eb', strokeWidth: 2 }); // Hypotenuse
+
+            // Labels for lengths
+            board.create('text', [0, 4.5], '9', { anchorX: 'right', anchorY: 'middle', cssClass: 'text-black font-bold', fontSize: 16 });
+            board.create('text', [20, 4.5], '40', { anchorX: 'middle', anchorY: 'bottom', cssClass: 'text-black font-bold', fontSize: 16 });
+            board.create('text', [20, 0], '41', { anchorX: 'middle', anchorY: 'top', cssClass: 'text-black font-bold', fontSize: 16 });
+        }
+
+        // Board 3: Find x
+        function initBoard3() {
+            const board = JXG.JSXGraph.initBoard('jxgbox3', {
+                boundingbox: [-15, 15, 15, -15],
+                axis: false,
+                grid: false,
+                showCopyright: false,
+                showNavigation: false
+            });
+
+            const center = board.create('point', [0, 0], { visible: false });
+            const c = board.create('circle', [center, 8], { strokeColor: '#e5e7eb', strokeWidth: 2 });
+
+            // External point P
+            const p = board.create('point', [-12, 0], { name: 'P', size: 3, color: '#3b82f6' });
+            
+            // Tangent points
+            const q = board.create('point', [-1.9, 7.77], { name: 'Q', size: 2, color: '#e5e7eb' });
+            const r = board.create('point', [-1.9, -7.77], { name: 'R', size: 2, color: '#e5e7eb' });
+
+            // Tangent segments
+            const segPQ = board.create('segment', [p, q], { strokeColor: '#f87171', strokeWidth: 2 });
+            const segPR = board.create('segment', [p, r], { strokeColor: '#f87171', strokeWidth: 2 });
+
+            // Labels for lengths
+            board.create('text', [-7, 5], '3x - 6', { cssClass: 'text-black font-bold', fontSize: 16 });
+            board.create('text', [-7, -5], 'x + 10', { cssClass: 'text-black font-bold', fontSize: 16 });
+        }
+        
+        // Board 4: Equation of a Circle
+        function initBoard4() {
+            const board = JXG.JSXGraph.initBoard('jxgbox4', {
+                boundingbox: [-10, 15, 15, -10],
+                axis: true,
+                grid: true,
+                showCopyright: false,
+                showNavigation: true,
+                keepAspectRatio: true
+            });
+
+            // Center (h, k)
+            const center = board.create('point', [4, 3], { 
+                name: '(4, 3)', 
+                size: 3, 
+                color: '#3b82f6',
+                label: { offset: [10, 10], cssClass: 'text-black font-bold' }
+            });
+            
+            // Circle
+            const c = board.create('circle', [center, 9], { 
+                strokeColor: '#60a5fa', 
+                strokeWidth: 3 
+            });
+        }
+
+        // Initialize all boards on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initBoard1();
+            initBoard2();
+            initBoard3();
+            initBoard4();
+        });
+
+    </script>
+</body>
+</html>
