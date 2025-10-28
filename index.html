@@ -10,7 +10,8 @@
     
     <!-- 2. JSXGraph for geometry rendering -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.6.1/dist/jsxgraph.css" />
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jsxgraph@1.6.1/dist/jsxgraphcore.js"></script>
+    <!-- Updated script source as requested -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jsxgraph@1.1.0/distrib/jsxgraphcore.js"></script>
     
     <!-- 3. MathJax for beautiful math notation -->
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -276,7 +277,7 @@
         }
 
         // Initialize all boards on page load
-        document.addEventListener('DOMContentLoaded', () => {
+        window.addEventListener('load', () => { // <-- ADD THIS LINE
             // Move the line here:
             // Disable the default infobox on all JSXGraph boards
             JXG.Options.infobox.fontSize = 0;
