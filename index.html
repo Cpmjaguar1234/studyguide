@@ -10,11 +10,13 @@
     
     <!-- 2. JSXGraph for geometry rendering -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.6.1/dist/jsxgraph.css" />
-    <!-- Updated script source as requested -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jsxgraph@1.1.0/distrib/jsxgraphcore.js"></script>
     
-    <!-- 3. MathJax for beautiful math notation -->
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- 3. KaTeX for fast math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" xintegrity="sha384-nB0miv6/jRMoG6R8IeA13S8qBNlZScC/eJtfbsiV0lWmUvCRnZ6RNDw1SrMmPsR" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" xintegrity="sha384-7KOgC2OdvfiledIh9+rJ3j0CjMIdoHiMfDtf3i3lYjUoNFoV12Q+s9GEP6T6/t3/" crossorigin="anonymous"></script>
+    <!-- Auto-render extension for KaTeX -->
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" xintegrity="sha384-4wGPoEQrF8/NYgVS7XJgAMYFmkeCQyTTFwdW/sX/R3vYRSBNP9/D4cvcsBEaB/3E" crossorigin="anonymous"></script>
     
     <!-- 4. Custom styles -->
     <style>
@@ -30,11 +32,6 @@
             border-radius: 0.5rem; /* rounded-lg */
             background-color: #f7fafc; /* gray-100 for contrast */
         }
-        /* Style MathJax output */
-        mjx-container {
-            display: inline-block !important;
-            margin: 0 !important;
-        }
     </style>
 </head>
 <body class="bg-gray-900 text-gray-200 min-h-screen p-4 md:p-8">
@@ -48,98 +45,417 @@
         </header>
 
         <main>
-            <!-- Question 1: Naming Parts of a Circle (from 10-1) -->
-            <section class="bg-gray-800 rounded-lg shadow-xl p-6 mb-8">
-                <h2 class="text-2xl font-bold mb-4 text-white">Problem 1: Parts of a Circle</h2>
-                <p class="mb-4">For Exercises 1-4, refer to the diagram of $\text{Circle L}$.</p>
-                
-                <!-- JSXGraph rendering for Problem 1 -->
-                <div id="jxgbox1" class="jxgbox mb-4"></div>
-                
-                <ol class="list-decimal list-inside space-y-2 mb-4">
-                    <li>Name the circle.</li>
-                    <li>Name a radius.</li>
-                    <li>Name a chord.</li>
-                    <li>Name a diameter.</li>
-                </ol>
 
-                <button onclick="toggleAnswer('ans1')" class="px-5 py-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition duration-200 shadow-lg">
-                    Show Answer
-                </button>
-                <div id="ans1" class="hidden mt-4 p-4 bg-gray-700 rounded-lg space-y-2">
-                    <p><strong>1. Name the circle:</strong> $\text{Circle L}$ (or $\odot L$)</p>
-                    <p><strong>2. Name a radius:</strong> $\overline{RL}$, $\overline{LT}$, or $\overline{LW}$</p>
-                    <p><strong>3. Name a chord:</strong> $\overline{RS}$ or $\overline{ST}$ (Note: $\overline{RT}$ is also a chord)</p>
-                    <p><strong>4. Name a diameter:</strong> $\overline{RT}$</p>
+            <!-- ====================================================== -->
+            <!-- Section 10-1: Circles and Circumference -->
+            <!-- ====================================================== -->
+            <section class="bg-gray-800 rounded-lg shadow-xl p-6 mb-8">
+                <h2 class="text-3xl font-bold mb-6 text-white border-b border-gray-700 pb-2">
+                    10-1: Circles and Circumference
+                </h2>
+
+                <!-- Questions 1-7 -->
+                <h3 class="text-xl font-semibold mb-4 text-blue-300">Exercises 1-7: Refer to $\odot L$</h3>
+                <p class="mb-4">For Exercises 1-7, refer to the diagram of $\odot L$.</p>
+                <div id="jxg-10-1-1" class="jxgbox mb-4"></div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                    <!-- Q1 -->
+                    <div>
+                        <p class="font-medium">1. Name the circle.</p>
+                        <button onclick="toggleAnswer('ans-10-1-1')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-1-1" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p>$\odot L$ (or Circle L)</p>
+                        </div>
+                    </div>
+                    <!-- Q2 -->
+                    <div>
+                        <p class="font-medium">2. Name a radius.</p>
+                        <button onclick="toggleAnswer('ans-10-1-2')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-1-2" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p>$\overline{RL}$, $\overline{LT}$, or $\overline{LW}$</p>
+                        </div>
+                    </div>
+                    <!-- Q3 -->
+                    <div>
+                        <p class="font-medium">3. Name a chord.</p>
+                        <button onclick="toggleAnswer('ans-10-1-3')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-1-3" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p>$\overline{RS}$ or $\overline{ST}$ (Note: $\overline{RT}$ is also a chord)</p>
+                        </div>
+                    </div>
+                    <!-- Q4 -->
+                    <div>
+                        <p class="font-medium">4. Name a diameter.</p>
+                        <button onclick="toggleAnswer('ans-10-1-4')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-1-4" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p>$\overline{RT}$</p>
+                        </div>
+                    </div>
+                    <!-- Q5 -->
+                    <div>
+                        <p class="font-medium">5. Name a radius not drawn as part of a diameter.</p>
+                        <button onclick="toggleAnswer('ans-10-1-5')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-1-5" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p>$\overline{LW}$</p>
+                        </div>
+                    </div>
+                    <!-- Q6 -->
+                    <div>
+                        <p class="font-medium">6. Suppose the radius is 3.5 yards. Find the diameter.</p>
+                        <button onclick="toggleAnswer('ans-10-1-6')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-1-6" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p>$d = 2r = 2(3.5) = 7 \text{ yards}$</p>
+                        </div>
+                    </div>
+                    <!-- Q7 -->
+                    <div>
+                        <p class="font-medium">7. If $RT = 19$ meters, find $LW$.</p>
+                        <button onclick="toggleAnswer('ans-10-1-7')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-1-7" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p>$LW$ is a radius. $RT$ is a diameter. The radius is half the diameter.</p>
+                            <p>$r = d/2 = 19/2 = 9.5 \text{ meters}$. So, $LW = 9.5 \text{ m}$.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Questions 8-9 -->
+                <h3 class="text-xl font-semibold mt-10 mb-4 text-blue-300">Exercises 8-9: Intersecting Circles</h3>
+                <p class="mb-4">The diameters of $\odot L$ and $\odot M$ are 20 and 13 units, respectively, and $QR = 4$. Find each measure.</p>
+                <div id="jxg-10-1-8" class="jxgbox mb-4"></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                    <!-- Q8 -->
+                    <div>
+                        <p class="font-medium">8. Find $LQ$.</p>
+                        <button onclick="toggleAnswer('ans-10-1-8')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-1-8" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p>Diameter of $\odot L$ is 20, so radius $LR = 10$.</p>
+                            <p>$LQ = LR - QR = 10 - 4 = 6$</p>
+                        </div>
+                    </div>
+                    <!-- Q9 -->
+                    <div>
+                        <p class="font-medium">9. Find $RM$.</p>
+                        <button onclick="toggleAnswer('ans-10-1-9')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-1-9" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p>Diameter of $\odot M$ is 13, so radius $QM = 6.5$.</p>
+                            <p>$RM = QM - QR = 6.5 - 4 = 2.5$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Questions 10-11 -->
+                <h3 class="text-xl font-semibold mt-10 mb-4 text-blue-300">Exercises 10-11: Circumference</h3>
+                <p class="mb-4">Find the diameter and radius of a circle with the given circumference. Round to the nearest hundredth.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                    <!-- Q10 -->
+                    <div>
+                        <p class="font-medium">10. $C = 21.2 \text{ ft}$</p>
+                        <button onclick="toggleAnswer('ans-10-1-10')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-1-10" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p>$C = \pi d \implies d = C / \pi = 21.2 / \pi \approx 6.75 \text{ ft}$</p>
+                            <p>$r = d / 2 \approx 6.75 / 2 = 3.375 \approx 3.38 \text{ ft}$</p>
+                        </div>
+                    </div>
+                    <!-- Q11 -->
+                    <div>
+                        <p class="font-medium">11. $C = 5.9 \text{ m}$</p>
+                        <button onclick="toggleAnswer('ans-10-1-11')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-1-11" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p>$C = \pi d \implies d = C / \pi = 5.9 / \pi \approx 1.88 \text{ m}$</p>
+                            <p>$r = d / 2 \approx 1.88 / 2 = 0.94 \text{ m}$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Questions 12-13 -->
+                <h3 class="text-xl font-semibold mt-10 mb-4 text-blue-300">Exercises 12-13: Exact Circumference</h3>
+                <p class="mb-4">Find the exact circumference of each circle using the given inscribed or circumscribed polygon.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                    <!-- Q12 -->
+                    <div>
+                        <p class="font-medium">12. Inscribed right triangle</p>
+                        <div id="jxg-10-1-12" class="jxgbox mb-4"></div>
+                        <button onclick="toggleAnswer('ans-10-1-12')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-1-12" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p>The hypotenuse of a right triangle inscribed in a circle is the diameter.</p>
+                            <p>Use Pythagorean theorem: $a^2 + b^2 = c^2$</p>
+                            <p>$7^2 + 24^2 = d^2 \implies 49 + 576 = d^2$</p>
+                            <p>$d^2 = 625 \implies d = 25 \text{ cm}$</p>
+                            <p>Exact Circumference: $C = \pi d = 25\pi \text{ cm}$</p>
+                        </div>
+                    </div>
+                    <!-- Q13 -->
+                    <div>
+                        <p class="font-medium">13. Circumscribed rectangle</p>
+                        <div id="jxg-10-1-13" class="jxgbox mb-4"></div>
+                        <button onclick="toggleAnswer('ans-10-1-13')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-1-13" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p>The diameter of the circle is equal to the side of the square (or the shorter side if it's a non-square rectangle, but this is a square from the triangle inside).</p>
+                            <p>We need the diameter. The image shows a right triangle with legs 40 and 42. Wait, that's for Q13 in the *other* doc. The image for 10-1 Q13 has a 40mi and 42mi... this implies a 3-4-5 triangle * 10? No, it's a right triangle with legs 40 and 42. The hypotenuse is $d$.</p>
+                            <p>$40^2 + 42^2 = d^2 \implies 1600 + 1764 = d^2$</p>
+                            <p>$d^2 = 3364 \implies d = \sqrt{3364} = 58 \text{ mi}$</p>
+                            <p>Exact Circumference: $C = \pi d = 58\pi \text{ mi}$</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Question 14 -->
+                <h3 class="text-xl font-semibold mt-10 mb-4 text-blue-300">Exercise 14: Sundial</h3>
+                <div class="p-4 bg-gray-700 rounded-lg">
+                    <p class="font-medium mb-2">14. SUNDIALS: Herman purchased a sundial to use as the centerpiece for a garden. The diameter of the sundial is 9.5 inches.</p>
+                    <p class="mb-2"><strong>a.</strong> Find the radius of the sundial.</p>
+                    <p class="mb-2"><strong>b.</strong> Find the circumference of the sundial to the nearest hundredth.</p>
+                    <button onclick="toggleAnswer('ans-10-1-14')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                    <div id="ans-10-1-14" class="hidden mt-2 p-3 bg-gray-600 rounded-lg">
+                        <p><strong>a.</strong> $r = d / 2 = 9.5 / 2 = 4.75 \text{ in.}$</p>
+                        <p><strong>b.</strong> $C = \pi d = \pi(9.5) \approx 29.85 \text{ in.}$</p>
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- ====================================================== -->
+            <!-- Section 10-5: Tangents -->
+            <!-- ====================================================== -->
+            <section class="bg-gray-800 rounded-lg shadow-xl p-6 mb-8">
+                <h2 class="text-3xl font-bold mb-6 text-white border-b border-gray-700 pb-2">
+                    10-5: Tangents
+                </h2>
+
+                <!-- Questions 1-2 -->
+                <h3 class="text-xl font-semibold mb-4 text-blue-300">Exercises 1-2: Justify Tangent</h3>
+                <p class="mb-4">Determine whether each segment is tangent to the given circle. Justify your answer.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                    <!-- Q1 -->
+                    <div>
+                        <p class="font-medium">1. $\overline{HI}$</p>
+                        <div id="jxg-10-5-1" class="jxgbox mb-4"></div>
+                        <button onclick="toggleAnswer('ans-10-5-1')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-5-1" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p><strong>Yes, $\overline{HI}$ is tangent.</strong></p>
+                            <p>Justification: Check using the converse of the Pythagorean Theorem.</p>
+                            <p>$GI^2 + HI^2 \stackrel{?}{=} HG^2$</p>
+                            <p>$9^2 + 40^2 \stackrel{?}{=} 41^2$</p>
+                            <p>$81 + 1600 \stackrel{?}{=} 1681$</p>
+                            <p>$1681 = 1681$. Since it's a right triangle, $\overline{HI} \perp \overline{GI}$.</p>
+                        </div>
+                    </div>
+                    <!-- Q2 -->
+                    <div>
+                        <p class="font-medium">2. $\overline{AB}$</p>
+                        <div id="jxg-10-5-2" class="jxgbox mb-4"></div>
+                        <button onclick="toggleAnswer('ans-10-5-2')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-5-2" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p><strong>No, $\overline{AB}$ is not tangent.</strong></p>
+                            <p>Justification: The radius is 4, so $AC = 4$. The hypotenuse $CB = 13$. The leg $AB = 12$.</p>
+                            <p>$AC^2 + AB^2 \stackrel{?}{=} CB^2$</p>
+                            <p>$4^2 + 12^2 \stackrel{?}{=} 13^2$</p>
+                            <p>$16 + 144 \stackrel{?}{=} 169$</p>
+                            <p>$160 \neq 169$. Since it's not a right triangle, $\overline{AB}$ is not perpendicular to the radius $\overline{AC}$.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Questions 3-6 -->
+                <h3 class="text-xl font-semibold mt-10 mb-4 text-blue-300">Exercises 3-6: Find $x$</h3>
+                <p class="mb-4">Find $x$. Assume that segments that appear to be tangent are tangent. Round to the nearest tenth if necessary.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                    <!-- Q3 -->
+                    <div>
+                        <p class="font-medium">3.</p>
+                        <div id="jxg-10-5-3" class="jxgbox mb-4"></div>
+                        <button onclick="toggleAnswer('ans-10-5-3')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-5-3" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p>Two tangents from the same external point are congruent.</p>
+                            <p>$3x - 6 = x + 10 \implies 2x = 16 \implies \mathbf{x = 8}$</p>
+                        </div>
+                    </div>
+                    <!-- Q4 -->
+                    <div>
+                        <p class="font-medium">4.</p>
+                        <div id="jxg-10-5-4" class="jxgbox mb-4"></div>
+                        <button onclick="toggleAnswer('ans-10-5-4')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-5-4" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p>Two tangents from the same external point are congruent.</p>
+                            <p>$4x + 2 = 2x + 8 \implies 2x = 6 \implies \mathbf{x = 3}$</p>
+                        </div>
+                    </div>
+                    <!-- Q5 -->
+                    <div>
+                        <p class="font-medium">5.</p>
+                        <div id="jxg-10-5-5" class="jxgbox mb-4"></div>
+                        <button onclick="toggleAnswer('ans-10-5-5')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-5-5" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p>The tangent is perpendicular to the radius, forming a right triangle.</p>
+                            <p>Legs: $x$ and $17$. Hypotenuse: $8 + x$ (radius + external part)</p>
+                            <p>$x^2 + 17^2 = (x + 8)^2$</p>
+                            <p>$x^2 + 289 = x^2 + 16x + 64$</p>
+                            <p>$289 = 16x + 64 \implies 225 = 16x$</p>
+                            <p>$x = 225 / 16 = \mathbf{14.0625} \approx \mathbf{14.1}$</p>
+                        </div>
+                    </div>
+                    <!-- Q6 -->
+                    <div>
+                        <p class="font-medium">6.</p>
+                        <div id="jxg-10-5-6" class="jxgbox mb-4"></div>
+                        <button onclick="toggleAnswer('ans-10-5-6')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-5-6" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p>The tangent is perpendicular to the radius, forming a right triangle.</p>
+                            <p>Legs: $10$ and $24$. Hypotenuse: $x$.</p>
+                            <p>$10^2 + 24^2 = x^2$</p>
+                            <p>$100 + 576 = x^2 \implies x^2 = 676$</p>
+                            <p>$x = \sqrt{676} = \mathbf{26}$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Questions 7-8 -->
+                <h3 class="text-xl font-semibold mt-10 mb-4 text-blue-300">Exercises 7-8: Find $x$ and Perimeter</h3>
+                <p class="mb-4">For each figure, find $x$. Then find the perimeter.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                    <!-- Q7 -->
+                    <div>
+                        <p class="font-medium">7.</p>
+                        <div id="jxg-10-5-7" class="jxgbox mb-4"></div>
+                        <button onclick="toggleAnswer('ans-10-5-7')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-5-7" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p>Segments from the same vertex are equal.</p>
+                            <p>$x = 13$ (from vertex H).</p>
+                            <p>Perimeter = $2(13) + 2(9) + 2(5) + 2(13)$</p>
+                            <p>Perimeter = $26 + 18 + 10 + 26 = \mathbf{80}$</p>
+                        </div>
+                    </div>
+                    <!-- Q8 -->
+                    <div>
+                        <p class="font-medium">8.</p>
+                        <div id="jxg-10-5-8" class="jxgbox mb-4"></div>
+                        <button onclick="toggleAnswer('ans-10-5-8')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-5-8" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p>Segments from the same vertex are equal.</p>
+                            <p>$2x = 13 \implies \mathbf{x = 6.5}$</p>
+                            <p>Perimeter = $2(13) + 2(13) + 2(13) + 2(13)$</p>
+                            <p>Perimeter = $4 \times 26 = \mathbf{104}$</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <!-- Question 2: Tangent Justification (from 10-5) -->
+
+            <!-- ====================================================== -->
+            <!-- Section 10-8: Equations of Circles -->
+            <!-- ====================================================== -->
             <section class="bg-gray-800 rounded-lg shadow-xl p-6 mb-8">
-                <h2 class="text-2xl font-bold mb-4 text-white">Problem 2: Tangent Justification</h2>
-                <p class="mb-4">Determine whether $\overline{HI}$ is tangent to $\text{Circle G}$. Justify your answer.</p>
-                
-                <!-- JSXGraph rendering for Problem 2 -->
-                <div id="jxgbox2" class="jxgbox mb-4"></div>
+                <h2 class="text-3xl font-bold mb-6 text-white border-b border-gray-700 pb-2">
+                    10-8: Equations of Circles
+                </h2>
 
-                <button onclick="toggleAnswer('ans2')" class="px-5 py-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition duration-200 shadow-lg">
-                    Show Answer
-                </button>
-                <div id="ans2" class="hidden mt-4 p-4 bg-gray-700 rounded-lg space-y-2">
-                    <p><strong>Answer:</strong> Yes, $\overline{HI}$ is tangent.</p>
-                    <p><strong>Justification:</strong> A line is tangent to a circle if and only if it is perpendicular to the radius at the point of tangency. We must check if $\triangle HGI$ is a right triangle, with the right angle at G.</p>
-                    <p>We can use the converse of the Pythagorean Theorem:</p>
-                    <p>$a^2 + b^2 \stackrel{?}{=} c^2$</p>
-                    <p>$(GI)^2 + (HI)^2 \stackrel{?}{=} (HG)^2$</p>
-                    <p>$9^2 + 40^2 \stackrel{?}{=} 41^2$</p>
-                    <p>$81 + 1600 \stackrel{?}{=} 1681$</p>
-                    <p>$1681 = 1681$</p>
-                    <p>Since the theorem holds true, $\triangle HGI$ is a right triangle and $\angle HGI$ is a right angle. Therefore, $\overline{HI} \perp \overline{GI}$, making $\overline{HI}$ tangent to $\text{Circle G}$.</p>
+                <!-- Questions 1-6 -->
+                <h3 class="text-xl font-semibold mb-4 text-blue-300">Exercises 1-6: Write the Equation</h3>
+                <p class="mb-4">Write the equation of each circle. The standard form is $(x - h)^2 + (y - k)^2 = r^2$.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                    <!-- Q1 -->
+                    <div>
+                        <p class="font-medium">1. Center at origin, radius 6</p>
+                        <div id="jxg-10-8-1" class="jxgbox mb-4"></div>
+                        <button onclick="toggleAnswer('ans-10-8-1')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-8-1" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p>$(h, k) = (0, 0)$, $r = 6$</p>
+                            <p>$(x - 0)^2 + (y - 0)^2 = 6^2$</p>
+                            <p>$\mathbf{x^2 + y^2 = 36}$</p>
+                        </div>
+                    </div>
+                    <!-- Q2 -->
+                    <div>
+                        <p class="font-medium">2. Center at $(0, 0)$, radius 2</p>
+                        <div id="jxg-10-8-2" class="jxgbox mb-4"></div>
+                        <button onclick="toggleAnswer('ans-10-8-2')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-8-2" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p>$(h, k) = (0, 0)$, $r = 2$</p>
+                            <p>$(x - 0)^2 + (y - 0)^2 = 2^2$</p>
+                            <p>$\mathbf{x^2 + y^2 = 4}$</p>
+                        </div>
+                    </div>
+                    <!-- Q3 -->
+                    <div>
+                        <p class="font-medium">3. Center at $(4, 3)$, radius 9</p>
+                        <div id="jxg-10-8-3" class="jxgbox mb-4"></div>
+                        <button onclick="toggleAnswer('ans-10-8-3')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-8-3" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p>$(h, k) = (4, 3)$, $r = 9$</p>
+                            <p>$(x - 4)^2 + (y - 3)^2 = 9^2$</p>
+                            <p>$\mathbf{(x - 4)^2 + (y - 3)^2 = 81}$</p>
+                        </div>
+                    </div>
+                    <!-- Q4 -->
+                    <div>
+                        <p class="font-medium">4. Center at $(7, 1)$, diameter 24</p>
+                        <div id="jxg-10-8-4" class="jxgbox mb-4"></div>
+                        <button onclick="toggleAnswer('ans-10-8-4')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-8-4" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p>$(h, k) = (7, 1)$, $d = 24 \implies r = 12$</p>
+                            <p>$(x - 7)^2 + (y - 1)^2 = 12^2$</p>
+                            <p>$\mathbf{(x - 7)^2 + (y - 1)^2 = 144}$</p>
+                        </div>
+                    </div>
+                    <!-- Q5 -->
+                    <div>
+                        <p class="font-medium">5. Center at $(-4, -1)$, passes through $(-2, 3)$</p>
+                        <div id="jxg-10-8-5" class="jxgbox mb-4"></div>
+                        <button onclick="toggleAnswer('ans-10-8-5')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-8-5" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p>$(h, k) = (-4, -1)$. Need $r^2$.</p>
+                            <p>Use distance formula for $r^2$: $(x - h)^2 + (y - k)^2 = r^2$</p>
+                            <p>$(-2 - (-4))^2 + (3 - (-1))^2 = r^2$</p>
+                            <p>$(-2 + 4)^2 + (3 + 1)^2 = r^2$</p>
+                            <p>$2^2 + 4^2 = r^2 \implies 4 + 16 = r^2 \implies r^2 = 20$</p>
+                            <p>Equation: $\mathbf{(x + 4)^2 + (y + 1)^2 = 20}$</p>
+                        </div>
+                    </div>
+                    <!-- Q6 -->
+                    <div>
+                        <p class="font-medium">6. Center at $(5, -2)$, passes through $(4, 0)$</p>
+                        <div id="jxg-10-8-6" class="jxgbox mb-4"></div>
+                        <button onclick="toggleAnswer('ans-10-8-6')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-8-6" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p>$(h, k) = (5, -2)$. Need $r^2$.</p>
+                            <p>Use distance formula for $r^2$: $(x - h)^2 + (y - k)^2 = r^2$</p>
+                            <p>$(4 - 5)^2 + (0 - (-2))^2 = r^2$</p>
+                            <p>$(-1)^2 + (2)^2 = r^2 \implies 1 + 4 = r^2 \implies r^2 = 5$</p>
+                            <p>Equation: $\mathbf{(x - 5)^2 + (y + 2)^2 = 5}$</p>
+                        </div>
+                    </div>
                 </div>
-            </section>
 
-            <!-- Question 3: Find x (Tangents from a point) (from 10-5) -->
-            <section class="bg-gray-800 rounded-lg shadow-xl p-6 mb-8">
-                <h2 class="text-2xl font-bold mb-4 text-white">Problem 3: Find $x$</h2>
-                <p class="mb-4">Find $x$. Assume that segments that appear to be tangent are tangent.</p>
-                
-                <!-- JSXGraph rendering for Problem 3 -->
-                <div id="jxgbox3" class="jxgbox mb-4"></div>
-
-                <button onclick="toggleAnswer('ans3')" class="px-5 py-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition duration-200 shadow-lg">
-                    Show Answer
-                </button>
-                <div id="ans3" class="hidden mt-4 p-4 bg-gray-700 rounded-lg space-y-2">
-                    <p><strong>Answer:</strong> $x = 8$</p>
-                    <p><strong>Justification:</strong> If two segments from the same exterior point are tangent to a circle, then they are congruent.</p>
-                    <p>$\overline{PQ} \cong \overline{PR}$</p>
-                    <p>$3x - 6 = x + 10$</p>
-                    <p>$2x - 6 = 10 \text{ (Subtract } x \text{ from both sides)}$</p>
-                    <p>$2x = 16 \text{ (Add } 6 \text{ to both sides)}$</p>
-                    <p>$x = 8 \text{ (Divide by } 2 \text{)}$</p>
+                <!-- Questions 7-8 -->
+                <h3 class="text-xl font-semibold mt-10 mb-4 text-blue-300">Exercises 7-8: Find Equation from Graph</h3>
+                <p class="mb-4">Find the equation of each circle.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                    <!-- Q7 -->
+                    <div>
+                        <p class="font-medium">7.</p>
+                        <div id="jxg-10-8-7" class="jxgbox mb-4"></div>
+                        <button onclick="toggleAnswer('ans-10-8-7')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-8-7" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p>From graph: Center $(h, k) = (0, 0)$.</p>
+                            <p>Radius $r = 3$.</p>
+                            <p>Equation: $\mathbf{x^2 + y^2 = 9}$</p>
+                        </div>
+                    </div>
+                    <!-- Q8 -->
+                    <div>
+                        <p class="font-medium">8.</p>
+                        <div id="jxg-10-8-8" class="jxgbox mb-4"></div>
+                        <button onclick="toggleAnswer('ans-10-8-8')" class="text-sm px-4 py-1 mt-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition">Show Answer</button>
+                        <div id="ans-10-8-8" class="hidden mt-2 p-3 bg-gray-700 rounded-lg">
+                            <p>From graph: Center $(h, k) = (1, -3)$.</p>
+                            <p>Radius $r = 2$.</p>
+                            <p>Equation: $\mathbf{(x - 1)^2 + (y + 3)^2 = 4}$</p>
+                        </div>
+                    </div>
                 </div>
-            </section>
 
-            <!-- Question 4: Equation of a Circle (from 10-8) -->
-            <section class="bg-gray-800 rounded-lg shadow-xl p-6 mb-8">
-                <h2 class="text-2xl font-bold mb-4 text-white">Problem 4: Equation of a Circle</h2>
-                <p class="mb-4">Write the equation of the circle with its center at $(4, 3)$ and a radius of $9$.</p>
-                
-                <!-- JSXGraph rendering for Problem 4 -->
-                <div id="jxgbox4" class="jxgbox mb-4"></div>
-
-                <button onclick="toggleAnswer('ans4')" class="px-5 py-2 bg-blue-600 rounded-md font-medium text-white hover:bg-blue-700 transition duration-200 shadow-lg">
-                    Show Answer
-                </button>
-                <div id="ans4" class="hidden mt-4 p-4 bg-gray-700 rounded-lg space-y-2">
-                    <p><strong>Answer:</strong> $(x - 4)^2 + (y - 3)^2 = 81$</p>
-                    <p><strong>Justification:</strong> The standard equation for a circle is:</p>
-                    <p>$(x - h)^2 + (y - k)^2 = r^2$</p>
-                    <p>Where $(h, k)$ is the center and $r$ is the radius.</p>
-                    <p>Substitute the given values: $(h, k) = (4, 3)$ and $r = 9$.</p>
-                    <p>$(x - 4)^2 + (y - 3)^2 = 9^2$</p>
-                    <p>$(x - 4)^2 + (y - 3)^2 = 81$</p>
-                </div>
             </section>
 
         </main>
@@ -154,148 +470,309 @@
             answerEl.classList.toggle('hidden');
         }
 
-        // Disable the default infobox on all JSXGraph boards
-        // JXG.Options.infobox.fontSize = 0; // <-- MOVE THIS LINE
+        // --- Board Style Defaults ---
+        const pointAtts = { size: 2, color: '#e5e7eb', name: '' };
+        const centerAtts = { size: 3, color: '#3b82f6', name: '' };
+        const lineAtts = { strokeColor: '#e5e7eb', strokeWidth: 2 };
+        const radiusAtts = { strokeColor: '#60a5fa', strokeWidth: 2 };
+        const tangentAtts = { strokeColor: '#f87171', strokeWidth: 2 };
+        const textAtts = { cssClass: 'text-black font-bold', fontSize: 16 };
+        const boardOptions = {
+            axis: false,
+            grid: false,
+            showCopyright: false,
+            showNavigation: false,
+            keepAspectRatio: true
+        };
 
         // --- Initialize JSXGraph Boards ---
 
-        // Board 1: Parts of a Circle
-        function initBoard1() {
-            const board = JXG.JSXGraph.initBoard('jxgbox1', {
-                boundingbox: [-10, 10, 10, -10],
-                axis: false,
-                grid: false,
-                showCopyright: false,
-                showNavigation: false
-            });
-
-            // Center L
-            const l = board.create('point', [0, 0], { name: 'L', size: 3, color: '#3b82f6' });
-            // Circle
-            const c = board.create('circle', [l, 7], { strokeColor: '#e5e7eb', strokeWidth: 2 });
-            
-            // Points on circle
-            const r = board.create('point', [-7, 0], { name: 'R', size: 2, color: '#e5e7eb' });
-            const t = board.create('point', [7, 0], { name: 'T', size: 2, color: '#e5e7eb' });
-            const w = board.create('point', [0, 7], { name: 'W', size: 2, color: '#e5e7eb' });
-            const s = board.create('point', [-4, 5.65], { name: 'S', size: 2, color: '#e5e7eb' });
-
-            // Diameter RT
-            board.create('segment', [r, t], { strokeColor: '#60a5fa', strokeWidth: 2 });
-            // Radius LW
-            board.create('segment', [l, w], { strokeColor: '#60a5fa', strokeWidth: 2 });
-            // Radius LR
-            board.create('segment', [l, r], { strokeColor: '#60a5fa', strokeWidth: 2, dash: 2 });
-            // Chord RS
-            board.create('segment', [r, s], { strokeColor: '#f87171', strokeWidth: 2 });
-            // Chord ST
-            board.create('segment', [s, t], { strokeColor: '#f87171', strokeWidth: 2 });
+        // Board 10-1, Q 1-7
+        function initBoard10_1_1() {
+            const board = JXG.JSXGraph.initBoard('jxg-10-1-1', { ...boardOptions, boundingbox: [-10, 10, 10, -10] });
+            const l = board.create('point', [0, 0], { ...centerAtts, name: 'L' });
+            board.create('circle', [l, 7], lineAtts);
+            const r = board.create('point', [-7, 0], { ...pointAtts, name: 'R' });
+            const t = board.create('point', [7, 0], { ...pointAtts, name: 'T' });
+            const w = board.create('point', [0, 7], { ...pointAtts, name: 'W' });
+            const s = board.create('point', [-4, 5.65], { ...pointAtts, name: 'S' });
+            board.create('segment', [r, t], radiusAtts); // Diameter RT
+            board.create('segment', [l, w], radiusAtts); // Radius LW
+            board.create('segment', [r, s], tangentAtts); // Chord RS
+            board.create('segment', [s, t], tangentAtts); // Chord ST
         }
 
-        // Board 2: Tangent Justification
-        function initBoard2() {
-            const board = JXG.JSXGraph.initBoard('jxgbox2', {
-                boundingbox: [-5, 45, 45, -5],
-                axis: false,
-                grid: false,
-                showCopyright: false,
-                showNavigation: false
-            });
-
-            // Points
-            const g = board.create('point', [0, 0], { name: 'G', size: 3, color: '#3b82f6' });
-            const i = board.create('point', [0, 9], { name: 'I', size: 2, color: '#e5e7eb' });
-            const h = board.create('point', [40, 0], { name: 'H', size: 2, color: '#e5e7eb' });
-            
-            // Circle
-            const c = board.create('circle', [g, 9], { strokeColor: '#e5e7eb', strokeWidth: 2 });
-
-            // Triangle segments
-            const segGI = board.create('segment', [g, i], { strokeColor: '#60a5fa', strokeWidth: 2 }); // Radius
-            const segHI = board.create('segment', [h, i], { strokeColor: '#f87171', strokeWidth: 2 }); // Potential Tangent
-            const segHG = board.create('segment', [h, g], { strokeColor: '#e5e7eb', strokeWidth: 2 }); // Hypotenuse
-
-            // Labels for lengths
-            board.create('text', [0, 4.5], '9', { anchorX: 'right', anchorY: 'middle', cssClass: 'text-black font-bold', fontSize: 16 });
-            board.create('text', [20, 4.5], '40', { anchorX: 'middle', anchorY: 'bottom', cssClass: 'text-black font-bold', fontSize: 16 });
-            board.create('text', [20, 0], '41', { anchorX: 'middle', anchorY: 'top', cssClass: 'text-black font-bold', fontSize: 16 });
-        }
-
-        // Board 3: Find x
-        function initBoard3() {
-            const board = JXG.JSXGraph.initBoard('jxgbox3', {
-                boundingbox: [-15, 15, 15, -15],
-                axis: false,
-                grid: false,
-                showCopyright: false,
-                showNavigation: false
-            });
-
-            const center = board.create('point', [0, 0], { visible: false });
-            const c = board.create('circle', [center, 8], { strokeColor: '#e5e7eb', strokeWidth: 2 });
-
-            // External point P
-            const p = board.create('point', [-12, 0], { name: 'P', size: 3, color: '#3b82f6' });
-            
-            // Tangent points
-            const q = board.create('point', [-1.9, 7.77], { name: 'Q', size: 2, color: '#e5e7eb' });
-            const r = board.create('point', [-1.9, -7.77], { name: 'R', size: 2, color: '#e5e7eb' });
-
-            // Tangent segments
-            const segPQ = board.create('segment', [p, q], { strokeColor: '#f87171', strokeWidth: 2 });
-            const segPR = board.create('segment', [p, r], { strokeColor: '#f87171', strokeWidth: 2 });
-
-            // Labels for lengths
-            board.create('text', [-7, 5], '3x - 6', { cssClass: 'text-black font-bold', fontSize: 16 });
-            board.create('text', [-7, -5], 'x + 10', { cssClass: 'text-black font-bold', fontSize: 16 });
+        // Board 10-1, Q 8-9
+        function initBoard10_1_8() {
+            const board = JXG.JSXGraph.initBoard('jxg-10-1-8', { ...boardOptions, boundingbox: [-12, 12, 15, -12] });
+            // Circle L
+            const l = board.create('point', [-6.5, 0], { ...centerAtts, name: 'L' });
+            board.create('circle', [l, 10], lineAtts);
+            const r = board.create('point', [3.5, 0], { ...pointAtts, name: 'R' });
+            board.create('segment', [l, r], { ...radiusAtts, dash: 2 });
+            // Circle M
+            const m = board.create('point', [6, 0], { ...centerAtts, name: 'M' });
+            board.create('circle', [m, 6.5], lineAtts);
+            const q = board.create('point', [-0.5, 0], { ...pointAtts, name: 'Q' });
+            board.create('segment', [m, q], { ...radiusAtts, dash: 2 });
+            // QR segment
+            board.create('segment', [q, r], { strokeColor: '#facc15', strokeWidth: 3, name: '4' });
         }
         
-        // Board 4: Equation of a Circle
-        function initBoard4() {
-            const board = JXG.JSXGraph.initBoard('jxgbox4', {
-                boundingbox: [-10, 15, 15, -10],
-                axis: true,
-                grid: true,
-                showCopyright: false,
-                showNavigation: true,
-                keepAspectRatio: true
-            });
-
-            // Center (h, k)
-            const center = board.create('point', [4, 3], { 
-                name: '(4, 3)', 
-                size: 3, 
-                color: '#3b82f6',
-                label: { offset: [10, 10], cssClass: 'text-black font-bold' }
-            });
-            
-            // Circle
-            const c = board.create('circle', [center, 9], { 
-                strokeColor: '#60a5fa', 
-                strokeWidth: 3 
-            });
+        // Board 10-1, Q 12
+        function initBoard10_1_12() {
+            const board = JXG.JSXGraph.initBoard('jxg-10-1-12', { ...boardOptions, boundingbox: [-15, 15, 15, -15] });
+            const center = board.create('point', [0, 0], { visible: false });
+            const c = board.create('circle', [center, 12.5], lineAtts);
+            const p1 = board.create('point', [-12.5, 0], { visible: false });
+            const p2 = board.create('point', [12.5, 0], { visible: false });
+            const p3 = board.create('point', [3.5, 12], { visible: false }); // Solved 7-24-25 triangle
+            board.create('polygon', [p1, p2, p3], { borders: radiusAtts });
+            board.create('text', [0.5, 6], '7', { ...textAtts });
+            board.create('text', [8, 0], '24', { ...textAtts });
         }
 
+        // Board 10-1, Q 13
+        function initBoard10_1_13() {
+            const board = JXG.JSXGraph.initBoard('jxg-10-1-13', { ...boardOptions, boundingbox: [-35, 35, 35, -35] });
+            const center = board.create('point', [0, 0], { visible: false });
+            const c = board.create('circle', [center, 29], lineAtts); // r = 58/2
+            const p1 = board.create('point', [-21, -20], { visible: false });
+            const p2 = board.create('point', [21, 20], { visible: false });
+            const p3 = board.create('point', [-21, 20], { visible: false });
+            const p4 = board.create('point', [21, -20], { visible: false });
+            board.create('polygon', [p1, p2, p3, p4], { borders: radiusAtts }); // Rectangle
+            board.create('segment', [p3, p4], { ...radiusAtts, dash: 2 }); // Hypotenuse
+            board.create('text', [0, 20], '40 mi', { ...textAtts, anchorY: 'bottom' });
+            board.create('text', [21, 0], '42 mi', { ...textAtts, anchorX: 'left' });
+        }
+
+        // Board 10-5, Q 1
+        function initBoard10_5_1() {
+            const board = JXG.JSXGraph.initBoard('jxg-10-5-1', { ...boardOptions, boundingbox: [-5, 45, 45, -5] });
+            const g = board.create('point', [0, 0], { ...centerAtts, name: 'G' });
+            const i = board.create('point', [0, 9], { ...pointAtts, name: 'I' });
+            const h = board.create('point', [40, 0], { ...pointAtts, name: 'H' });
+            board.create('circle', [g, 9], lineAtts);
+            board.create('segment', [g, i], radiusAtts); // Radius
+            board.create('segment', [h, i], tangentAtts); // Potential Tangent
+            board.create('segment', [h, g], lineAtts); // Hypotenuse
+            board.create('text', [-2, 4.5], '9', { ...textAtts, anchorX: 'right' });
+            board.create('text', [20, 4.5], '40', { ...textAtts, anchorY: 'bottom' });
+            board.create('text', [20, -2], '41', { ...textAtts, anchorY: 'top' });
+        }
+
+        // Board 10-5, Q 2
+        function initBoard10_5_2() {
+            const board = JXG.JSXGraph.initBoard('jxg-10-5-2', { ...boardOptions, boundingbox: [-5, 15, 15, -5] });
+            const c = board.create('point', [0, 0], { ...centerAtts, name: 'C' });
+            const a = board.create('point', [0, 4], { ...pointAtts, name: 'A' });
+            const b = board.create('point', [12, 0], { ...pointAtts, name: 'B' });
+            board.create('circle', [c, 4], lineAtts);
+            board.create('segment', [c, a], radiusAtts); // Radius
+            board.create('segment', [a, b], tangentAtts); // Potential Tangent
+            board.create('segment', [c, b], lineAtts); // Hypotenuse
+            board.create('text', [-1, 2], '4', { ...textAtts, anchorX: 'right' });
+            board.create('text', [6, 2], '12', { ...textAtts, anchorY: 'bottom' });
+            board.create('text', [6, -1], '13', { ...textAtts, anchorY: 'top' });
+        }
+
+        // Board 10-5, Q 3
+        function initBoard10_5_3() {
+            const board = JXG.JSXGraph.initBoard('jxg-10-5-3', { ...boardOptions, boundingbox: [-15, 15, 15, -15] });
+            const center = board.create('point', [0, 0], { visible: false });
+            board.create('circle', [center, 8], lineAtts);
+            const p = board.create('point', [-12, 0], { ...centerAtts, name: 'P' });
+            const q = board.create('point', [-1.9, 7.77], { ...pointAtts, name: 'Q' });
+            const r = board.create('point', [-1.9, -7.77], { ...pointAtts, name: 'R' });
+            board.create('segment', [p, q], tangentAtts);
+            board.create('segment', [p, r], tangentAtts);
+            board.create('text', [-7, 5], '3x - 6', { ...textAtts });
+            board.create('text', [-7, -5], 'x + 10', { ...textAtts });
+        }
+
+        // Board 10-5, Q 4
+        function initBoard10_5_4() {
+            const board = JXG.JSXGraph.initBoard('jxg-10-5-4', { ...boardOptions, boundingbox: [-5, 15, 15, -15] });
+            const center = board.create('point', [6, 0], { visible: false });
+            board.create('circle', [center, 6], lineAtts);
+            const p = board.create('point', [0, 10], { ...centerAtts, name: 'B' });
+            const q = board.create('point', [0, 0], { ...pointAtts, name: 'A' });
+            const r = board.create('point', [9.7, 7.7], { ...pointAtts, name: 'C' });
+            board.create('segment', [p, q], tangentAtts);
+            board.create('segment', [p, r], tangentAtts);
+            board.create('text', [0, 5], '4x + 2', { ...textAtts, anchorX: 'right' });
+            board.create('text', [5, 9], '2x + 8', { ...textAtts });
+        }
+        
+        // Board 10-5, Q 5
+        function initBoard10_5_5() {
+            const board = JXG.JSXGraph.initBoard('jxg-10-5-5', { ...boardOptions, boundingbox: [-20, 20, 20, -5] });
+            const center = board.create('point', [0, 0], { ...centerAtts, name: 'G' });
+            const tangentPt = board.create('point', [0, 17], { ...pointAtts, name: 'F' });
+            const externalPt = board.create('point', [8, 0], { ...centerAtts, name: 'E' });
+            board.create('circle', [center, () => tangentPt.Y()], lineAtts);
+            board.create('segment', [center, tangentPt], radiusAtts); // Radius
+            board.create('segment', [tangentPt, externalPt], tangentAtts); // Tangent
+            board.create('segment', [center, externalPt], lineAtts); // Hypotenuse
+            board.create('text', [-1, 8.5], 'x', { ...textAtts, anchorX: 'right' });
+            board.create('text', [4, 8.5], '17', { ...textAtts, anchorY: 'bottom' });
+            board.create('text', [4, -1], 'x + 8', { ...textAtts, anchorY: 'top' });
+        }
+
+        // Board 10-5, Q 6
+        function initBoard10_5_6() {
+            const board = JXG.JSXGraph.initBoard('jxg-10-5-6', { ...boardOptions, boundingbox: [-5, 30, 30, -5] });
+            const center = board.create('point', [0, 0], { visible: false });
+            const tangentPt = board.create('point', [0, 10], { ...pointAtts });
+            const externalPt = board.create('point', [24, 0], { ...pointAtts });
+            board.create('circle', [center, 10], lineAtts);
+            board.create('segment', [center, tangentPt], radiusAtts);
+            board.create('segment', [tangentPt, externalPt], tangentAtts);
+            board.create('segment', [center, externalPt], lineAtts);
+            board.create('text', [-1, 5], '10', { ...textAtts, anchorX: 'right' });
+            board.create('text', [12, 5], '24', { ...textAtts, anchorY: 'bottom' });
+            board.create('text', [12, -1], 'x', { ...textAtts, anchorY: 'top' });
+        }
+
+        // Board 10-5, Q 7
+        function initBoard10_5_7() {
+            const board = JXG.JSXGraph.initBoard('jxg-10-5-7', { ...boardOptions, boundingbox: [-25, 25, 25, -25] });
+            const center = board.create('point', [0, 0], { visible: false });
+            board.create('circle', [center, 9], lineAtts); // Approx radius
+            // Vertices
+            const h = board.create('point', [-13, 13], { ...pointAtts, name: 'H' });
+            const j = board.create('point', [13, 13], { ...pointAtts, name: 'J' });
+            const k = board.create('point', [13, -20], { ...pointAtts, name: 'K' });
+            const l = board.create('point', [-13, -20], { ...pointAtts, name: 'L' });
+            board.create('polygon', [h, j, k, l], { borders: tangentAtts });
+            // Tangent points and labels
+            board.create('text', [0, 13], '9', { ...textAtts, anchorY: 'bottom' });
+            board.create('text', [13, -3.5], '5', { ...textAtts, anchorX: 'left' });
+            board.create('text', [0, -20], '13', { ...textAtts, anchorY: 'top' });
+            board.create('text', [-13, -3.5], 'x=13', { ...textAtts, anchorX: 'right' });
+        }
+
+        // Board 10-5, Q 8
+        function initBoard10_5_8() {
+            const board = JXG.JSXGraph.initBoard('jxg-10-5-8', { ...boardOptions, boundingbox: [-25, 25, 25, -25] });
+            const center = board.create('point', [0, 0], { visible: false });
+            board.create('circle', [center, 13], lineAtts); // Is a square
+            const h = board.create('point', [-13, 13], { ...pointAtts, name: 'R' });
+            const j = board.create('point', [13, 13], { ...pointAtts, name: 'S' });
+            const k = board.create('point', [13, -13], { ...pointAtts, name: 'T' });
+            const l = board.create('point', [-13, -13], { ...pointAtts, name: 'U' });
+            board.create('polygon', [h, j, k, l], { borders: tangentAtts });
+            board.create('text', [0, 13], '13', { ...textAtts, anchorY: 'bottom' });
+            board.create('text', [13, 0], '13', { ...textAtts, anchorX: 'left' });
+            board.create('text', [0, -13], '2x', { ...textAtts, anchorY: 'top' });
+            board.create('text', [-13, 0], '13', { ...textAtts, anchorX: 'right' });
+        }
+        
+        // Board 10-8, Q 1
+        function initBoard10_8_1() {
+            const board = JXG.JSXGraph.initBoard('jxg-10-8-1', { ...boardOptions, boundingbox: [-8, 8, 8, -8], axis: true });
+            const center = board.create('point', [0, 0], { ...centerAtts, name: '(0,0)' });
+            board.create('circle', [center, 6], radiusAtts);
+        }
+
+        // Board 10-8, Q 2
+        function initBoard10_8_2() {
+            const board = JXG.JSXGraph.initBoard('jxg-10-8-2', { ...boardOptions, boundingbox: [-3, 3, 3, -3], axis: true });
+            const center = board.create('point', [0, 0], { ...centerAtts, name: '(0,0)' });
+            board.create('circle', [center, 2], radiusAtts);
+        }
+        
+        // Board 10-8, Q 3
+        function initBoard10_8_3() {
+            const board = JXG.JSXGraph.initBoard('jxg-10-8-3', { ...boardOptions, boundingbox: [-8, 15, 15, -8], axis: true, grid: true });
+            const center = board.create('point', [4, 3], { ...centerAtts, name: '(4,3)' });
+            board.create('circle', [center, 9], radiusAtts);
+        }
+
+        // Board 10-8, Q 4
+        function initBoard10_8_4() {
+            const board = JXG.JSXGraph.initBoard('jxg-10-8-4', { ...boardOptions, boundingbox: [-8, 20, 15, -15], axis: true, grid: true });
+            const center = board.create('point', [7, 1], { ...centerAtts, name: '(7,1)' });
+            board.create('circle', [center, 12], radiusAtts);
+        }
+
+        // Board 10-8, Q 5
+        function initBoard10_8_5() {
+            const board = JXG.JSXGraph.initBoard('jxg-10-8-5', { ...boardOptions, boundingbox: [-10, 5, 5, -7], axis: true, grid: true });
+            const center = board.create('point', [-4, -1], { ...centerAtts, name: '(-4,-1)' });
+            const point = board.create('point', [-2, 3], { ...pointAtts, name: '(-2,3)' });
+            board.create('circle', [center, point], radiusAtts);
+            board.create('segment', [center, point], { ...radiusAtts, dash: 2 });
+        }
+
+        // Board 10-8, Q 6
+        function initBoard10_8_6() {
+            const board = JXG.JSXGraph.initBoard('jxg-10-8-6', { ...boardOptions, boundingbox: [-1, 7, 3, -6], axis: true, grid: true });
+            const center = board.create('point', [5, -2], { ...centerAtts, name: '(5,-2)' });
+            const point = board.create('point', [4, 0], { ...pointAtts, name: '(4,0)' });
+            board.create('circle', [center, point], radiusAtts);
+            board.create('segment', [center, point], { ...radiusAtts, dash: 2 });
+        }
+
+        // Board 10-8, Q 7
+        function initBoard10_8_7() {
+            const board = JXG.JSXGraph.initBoard('jxg-10-8-7', { ...boardOptions, boundingbox: [-4, 4, 4, -4], axis: true, grid: true });
+            const center = board.create('point', [0, 0], { ...centerAtts, name: '(0,0)' });
+            board.create('circle', [center, 3], radiusAtts);
+        }
+
+        // Board 10-8, Q 8
+        function initBoard10_8_8() {
+            const board = JXG.JSXGraph.initBoard('jxg-10-8-8', { ...boardOptions, boundingbox: [-2, 4, 1, -6], axis: true, grid: true });
+            const center = board.create('point', [1, -3], { ...centerAtts, name: '(1,-3)' });
+            board.create('circle', [center, 2], radiusAtts);
+        }
+
+
         // Initialize all boards on page load
-        window.addEventListener('load', () => { // <-- This block
+        window.addEventListener('load', () => { 
             // Disable the default infobox on all JSXGraph boards
             JXG.Options.infobox.fontSize = 0;
 
-            initBoard1();
-            initBoard2();
-            initBoard3();
-            initBoard4();
+            // --- Call all init functions ---
+            initBoard10_1_1();
+            initBoard10_1_8();
+            initBoard10_1_12();
+            initBoard10_1_13();
 
-            // --- ADD THIS LINE ---
-            // Manually tell MathJax to find and render all LaTeX on the page
-            if (typeof MathJax !== 'undefined' && MathJax.typeset) {
-                MathJax.typeset();
+            initBoard10_5_1();
+            initBoard10_5_2();
+            initBoard10_5_3();
+            initBoard10_5_4();
+            initBoard10_5_5();
+            initBoard10_5_6();
+            initBoard10_5_7();
+            initBoard10_5_8();
+
+            initBoard10_8_1();
+            initBoard10_8_2();
+            initBoard10_8_3();
+            initBoard10_8_4();
+            initBoard10_8_5();
+            initBoard10_8_6();
+            initBoard10_8_7();
+            initBoard10_8_8();
+
+            // Manually tell KaTeX to find and render all math
+            if (typeof renderMathInElement !== 'undefined') {
+                renderMathInElement(document.body, {
+                    delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '$', right: '$', display: false},
+                        {left: '\\(', right: '\\)', display: false},
+                        {left: '\\[', right: '\\]', display: true}
+                    ]
+                });
             }
-            // --- END ADD ---
         });
 
     </script>
 </body>
 </html>
-
 
